@@ -4,16 +4,36 @@
 
 ## Table of contents
 
-### Variables
+### Namespaces
 
-- [queue](modules.md#queue)
+- [Queue](modules/Queue.md)
 
-## Variables
+### Interfaces
 
-### queue
+- [Queue](interfaces/Queue.md)
 
-• **queue**: `Nothing`<`never`\>
+### Type aliases
+
+- [Invokable](modules.md#invokable)
+
+## Type aliases
+
+### Invokable
+
+Ƭ **Invokable**<`T`\>: `Object`
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `T` |
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `invoke` | `TaskFunction`<[], `T`\> |
 
 #### Defined in
 
-[queue.ts:3](https://github.com/lammonaaf/t-queues/blob/dbc3ecf/src/queue.ts#L3)
+[queue.ts:3](https://github.com/lammonaaf/t-queues/blob/46d7964/src/queue.ts#L3)
