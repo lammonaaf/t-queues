@@ -36,4 +36,4 @@
 
 #### Defined in
 
-[queue.ts:3](https://github.com/lammonaaf/t-queues/blob/46d7964/src/queue.ts#L3)
+[queue.ts:3](https://github.com/lammonaaf/t-queues/blob/b409a2e/src/queue.ts#L3)
