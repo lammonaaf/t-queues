@@ -29,7 +29,7 @@
 
 #### Defined in
 
-[queue.ts:12](https://github.com/lammonaaf/t-queues/blob/4852f4f/src/queue.ts#L12)
+[queue.ts:12](https://github.com/lammonaaf/t-queues/blob/5312a14/src/queue.ts#L12)
 
 ## Methods
 
@@ -43,7 +43,7 @@
 
 #### Defined in
 
-[queue.ts:10](https://github.com/lammonaaf/t-queues/blob/4852f4f/src/queue.ts#L10)
+[queue.ts:10](https://github.com/lammonaaf/t-queues/blob/5312a14/src/queue.ts#L10)
 
 ___
 
@@ -63,7 +63,7 @@ ___
 
 #### Defined in
 
-[queue.ts:6](https://github.com/lammonaaf/t-queues/blob/4852f4f/src/queue.ts#L6)
+[queue.ts:6](https://github.com/lammonaaf/t-queues/blob/5312a14/src/queue.ts#L6)
 
 ___
 
@@ -77,7 +77,7 @@ ___
 
 #### Defined in
 
-[queue.ts:9](https://github.com/lammonaaf/t-queues/blob/4852f4f/src/queue.ts#L9)
+[queue.ts:9](https://github.com/lammonaaf/t-queues/blob/5312a14/src/queue.ts#L9)
 
 ___
 
@@ -97,4 +97,4 @@ ___
 
 #### Defined in
 
-[queue.ts:7](https://github.com/lammonaaf/t-queues/blob/4852f4f/src/queue.ts#L7)
+[queue.ts:7](https://github.com/lammonaaf/t-queues/blob/5312a14/src/queue.ts#L7)
