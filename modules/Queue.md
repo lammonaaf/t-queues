@@ -33,7 +33,7 @@
 
 #### Defined in
 
-[queue.ts:16](https://github.com/lammonaaf/t-queues/blob/5312a14/src/queue.ts#L16)
+[queue.ts:16](https://github.com/lammonaaf/t-queues/blob/4b25aee/src/queue.ts#L16)
 
 ___
 
@@ -60,4 +60,4 @@ ___
 
 #### Defined in
 
-[queue.ts:20](https://github.com/lammonaaf/t-queues/blob/5312a14/src/queue.ts#L20)
+[queue.ts:20](https://github.com/lammonaaf/t-queues/blob/4b25aee/src/queue.ts#L20)
