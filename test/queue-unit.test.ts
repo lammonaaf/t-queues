@@ -13,7 +13,7 @@ const comparator = (a: ReturnType<typeof delayedValueTask>, b: ReturnType<typeof
 );
 
 describe('Queue', () => {
-  beforeEach(() => jest.useFakeTimers('legacy'));
+  beforeEach(() => jest.useFakeTimers({ legacyFakeTimers: true }));
   afterEach(() => jest.useRealTimers());
 
   const flushPromises = async () => {
@@ -43,25 +43,25 @@ describe('Queue', () => {
       canceled,
     })]);
 
-    expect(canceled).not.toBeCalled();
-    expect(rejected).not.toBeCalled();
-    expect(resolved).not.toBeCalled();
+    expect(canceled).toHaveBeenCalledTimes(0);
+    expect(rejected).toHaveBeenCalledTimes(0);
+    expect(resolved).toHaveBeenCalledTimes(0);
 
     expect(queue).toHaveLength(1);
 
     await advanceTime(99);
 
-    expect(canceled).not.toBeCalled();
-    expect(rejected).not.toBeCalled();
-    expect(resolved).not.toBeCalled();
+    expect(canceled).toHaveBeenCalledTimes(0);
+    expect(rejected).toHaveBeenCalledTimes(0);
+    expect(resolved).toHaveBeenCalledTimes(0);
 
     expect(queue).toHaveLength(1);
 
     await advanceTime(1);
 
-    expect(canceled).not.toBeCalled();
-    expect(rejected).not.toBeCalled();
-    expect(resolved).toBeCalledWith(42);
+    expect(canceled).toHaveBeenCalledTimes(0);
+    expect(rejected).toHaveBeenCalledTimes(0);
+    expect(resolved).toHaveBeenCalledWith(42);
 
     expect(queue).toHaveLength(0);
   });
@@ -88,56 +88,56 @@ describe('Queue', () => {
       }),
     ]);
 
-    expect(canceled1).not.toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).not.toBeCalled();
-    expect(canceled2).not.toBeCalled();
-    expect(rejected2).not.toBeCalled();
-    expect(resolved2).not.toBeCalled();
+    expect(canceled1).toHaveBeenCalledTimes(0);
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledTimes(0);
+    expect(canceled2).toHaveBeenCalledTimes(0);
+    expect(rejected2).toHaveBeenCalledTimes(0);
+    expect(resolved2).toHaveBeenCalledTimes(0);
 
     expect(queue).toHaveLength(2);
 
     await advanceTime(99);
 
-    expect(canceled1).not.toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).not.toBeCalled();
-    expect(canceled2).not.toBeCalled();
-    expect(rejected2).not.toBeCalled();
-    expect(resolved2).not.toBeCalled();
+    expect(canceled1).toHaveBeenCalledTimes(0);
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledTimes(0);
+    expect(canceled2).toHaveBeenCalledTimes(0);
+    expect(rejected2).toHaveBeenCalledTimes(0);
+    expect(resolved2).toHaveBeenCalledTimes(0);
 
     expect(queue).toHaveLength(2);
 
     await advanceTime(1);
 
-    expect(canceled1).not.toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).toBeCalledWith(42);
-    expect(canceled2).not.toBeCalled();
-    expect(rejected2).not.toBeCalled();
-    expect(resolved2).not.toBeCalled();
+    expect(canceled1).toHaveBeenCalledTimes(0);
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledWith(42);
+    expect(canceled2).toHaveBeenCalledTimes(0);
+    expect(rejected2).toHaveBeenCalledTimes(0);
+    expect(resolved2).toHaveBeenCalledTimes(0);
 
     expect(queue).toHaveLength(1);
 
     await advanceTime(199);
 
-    expect(canceled1).not.toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).toBeCalledWith(42);
-    expect(canceled2).not.toBeCalled();
-    expect(rejected2).not.toBeCalled();
-    expect(resolved2).not.toBeCalled();
+    expect(canceled1).toHaveBeenCalledTimes(0);
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledWith(42);
+    expect(canceled2).toHaveBeenCalledTimes(0);
+    expect(rejected2).toHaveBeenCalledTimes(0);
+    expect(resolved2).toHaveBeenCalledTimes(0);
 
     expect(queue).toHaveLength(1);
 
     await advanceTime(1);
 
-    expect(canceled1).not.toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).toBeCalledWith(42);
-    expect(canceled2).not.toBeCalled();
-    expect(rejected2).not.toBeCalled();
-    expect(resolved2).toBeCalledWith(64);
+    expect(canceled1).toHaveBeenCalledTimes(0);
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledWith(42);
+    expect(canceled2).toHaveBeenCalledTimes(0);
+    expect(rejected2).toHaveBeenCalledTimes(0);
+    expect(resolved2).toHaveBeenCalledWith(64);
 
     expect(queue).toHaveLength(0);
   });
@@ -164,23 +164,23 @@ describe('Queue', () => {
       }),
     ]);
 
-    expect(canceled1).not.toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).not.toBeCalled();
-    expect(canceled2).not.toBeCalled();
-    expect(rejected2).not.toBeCalled();
-    expect(resolved2).not.toBeCalled();
+    expect(canceled1).toHaveBeenCalledTimes(0);
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledTimes(0);
+    expect(canceled2).toHaveBeenCalledTimes(0);
+    expect(rejected2).toHaveBeenCalledTimes(0);
+    expect(resolved2).toHaveBeenCalledTimes(0);
 
     expect(queue).toHaveLength(2);
 
     await advanceTime(50);
 
-    expect(canceled1).not.toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).not.toBeCalled();
-    expect(canceled2).not.toBeCalled();
-    expect(rejected2).not.toBeCalled();
-    expect(resolved2).not.toBeCalled();
+    expect(canceled1).toHaveBeenCalledTimes(0);
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledTimes(0);
+    expect(canceled2).toHaveBeenCalledTimes(0);
+    expect(rejected2).toHaveBeenCalledTimes(0);
+    expect(resolved2).toHaveBeenCalledTimes(0);
 
     expect(queue).toHaveLength(2);
 
@@ -188,34 +188,34 @@ describe('Queue', () => {
 
     await flushPromises();
 
-    expect(canceled1).toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).not.toBeCalled();
-    expect(canceled2).not.toBeCalled();
-    expect(rejected2).not.toBeCalled();
-    expect(resolved2).not.toBeCalled();
+    expect(canceled1).toHaveBeenCalledTimes(1);
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledTimes(0);
+    expect(canceled2).toHaveBeenCalledTimes(0);
+    expect(rejected2).toHaveBeenCalledTimes(0);
+    expect(resolved2).toHaveBeenCalledTimes(0);
 
     expect(queue).toHaveLength(1);
 
     await advanceTime(199);
 
-    expect(canceled1).toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).not.toBeCalled();
-    expect(canceled2).not.toBeCalled();
-    expect(rejected2).not.toBeCalled();
-    expect(resolved2).not.toBeCalled();
+    expect(canceled1).toHaveBeenCalled();
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledTimes(0);
+    expect(canceled2).toHaveBeenCalledTimes(0);
+    expect(rejected2).toHaveBeenCalledTimes(0);
+    expect(resolved2).toHaveBeenCalledTimes(0);
 
     expect(queue).toHaveLength(1);
 
     await advanceTime(1);
 
-    expect(canceled1).toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).not.toBeCalled();
-    expect(canceled2).not.toBeCalled();
-    expect(rejected2).not.toBeCalled();
-    expect(resolved2).toBeCalledWith(64);
+    expect(canceled1).toHaveBeenCalled();
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledTimes(0);
+    expect(canceled2).toHaveBeenCalledTimes(0);
+    expect(rejected2).toHaveBeenCalledTimes(0);
+    expect(resolved2).toHaveBeenCalledWith(64);
 
     expect(queue).toHaveLength(0);
   });
@@ -242,45 +242,45 @@ describe('Queue', () => {
       }),
     ]);
 
-    expect(canceled1).not.toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).not.toBeCalled();
-    expect(canceled2).not.toBeCalled();
-    expect(rejected2).not.toBeCalled();
-    expect(resolved2).not.toBeCalled();
+    expect(canceled1).toHaveBeenCalledTimes(0);
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledTimes(0);
+    expect(canceled2).toHaveBeenCalledTimes(0);
+    expect(rejected2).toHaveBeenCalledTimes(0);
+    expect(resolved2).toHaveBeenCalledTimes(0);
 
     expect(queue).toHaveLength(2);
 
     await advanceTime(99);
 
-    expect(canceled1).not.toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).not.toBeCalled();
-    expect(canceled2).not.toBeCalled();
-    expect(rejected2).not.toBeCalled();
-    expect(resolved2).not.toBeCalled();
+    expect(canceled1).toHaveBeenCalledTimes(0);
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledTimes(0);
+    expect(canceled2).toHaveBeenCalledTimes(0);
+    expect(rejected2).toHaveBeenCalledTimes(0);
+    expect(resolved2).toHaveBeenCalledTimes(0);
 
     expect(queue).toHaveLength(2);
 
     await advanceTime(1);
 
-    expect(canceled1).not.toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).toBeCalledWith(42);
-    expect(canceled2).not.toBeCalled();
-    expect(rejected2).not.toBeCalled();
-    expect(resolved2).not.toBeCalled();
+    expect(canceled1).toHaveBeenCalledTimes(0);
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledWith(42);
+    expect(canceled2).toHaveBeenCalledTimes(0);
+    expect(rejected2).toHaveBeenCalledTimes(0);
+    expect(resolved2).toHaveBeenCalledTimes(0);
 
     expect(queue).toHaveLength(1);
 
     await advanceTime(100);
 
-    expect(canceled1).not.toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).toBeCalledWith(42);
-    expect(canceled2).not.toBeCalled();
-    expect(rejected2).not.toBeCalled();
-    expect(resolved2).not.toBeCalled();
+    expect(canceled1).toHaveBeenCalledTimes(0);
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledWith(42);
+    expect(canceled2).toHaveBeenCalledTimes(0);
+    expect(rejected2).toHaveBeenCalledTimes(0);
+    expect(resolved2).toHaveBeenCalledTimes(0);
 
     expect(queue).toHaveLength(1);
 
@@ -288,12 +288,12 @@ describe('Queue', () => {
 
     await flushPromises();
 
-    expect(canceled1).not.toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).toBeCalledWith(42);
-    expect(canceled2).toBeCalled();
-    expect(rejected2).not.toBeCalled();
-    expect(resolved2).not.toBeCalled();
+    expect(canceled1).toHaveBeenCalledTimes(0);
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledWith(42);
+    expect(canceled2).toHaveBeenCalled();
+    expect(rejected2).toHaveBeenCalledTimes(0);
+    expect(resolved2).toHaveBeenCalledTimes(0);
 
     expect(queue).toHaveLength(0);
   });
@@ -311,9 +311,9 @@ describe('Queue', () => {
       }),
     ]);
 
-    expect(canceled1).not.toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).not.toBeCalled();
+    expect(canceled1).toHaveBeenCalledTimes(0);
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledTimes(0);
 
     expect(queue).toHaveLength(1);
 
@@ -329,56 +329,56 @@ describe('Queue', () => {
       canceled: canceled2,
     }));
 
-    expect(canceled1).not.toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).not.toBeCalled();
-    expect(canceled2).not.toBeCalled();
-    expect(rejected2).not.toBeCalled();
-    expect(resolved2).not.toBeCalled();
+    expect(canceled1).toHaveBeenCalledTimes(0);
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledTimes(0);
+    expect(canceled2).toHaveBeenCalledTimes(0);
+    expect(rejected2).toHaveBeenCalledTimes(0);
+    expect(resolved2).toHaveBeenCalledTimes(0);
 
     expect(queue).toHaveLength(2);
 
     await advanceTime(49);
 
-    expect(canceled1).not.toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).not.toBeCalled();
-    expect(canceled2).not.toBeCalled();
-    expect(rejected2).not.toBeCalled();
-    expect(resolved2).not.toBeCalled();
+    expect(canceled1).toHaveBeenCalledTimes(0);
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledTimes(0);
+    expect(canceled2).toHaveBeenCalledTimes(0);
+    expect(rejected2).toHaveBeenCalledTimes(0);
+    expect(resolved2).toHaveBeenCalledTimes(0);
 
     expect(queue).toHaveLength(2);
 
     await advanceTime(1);
 
-    expect(canceled1).not.toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).toBeCalledWith(42);
-    expect(canceled2).not.toBeCalled();
-    expect(rejected2).not.toBeCalled();
-    expect(resolved2).not.toBeCalled();
+    expect(canceled1).toHaveBeenCalledTimes(0);
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledWith(42);
+    expect(canceled2).toHaveBeenCalledTimes(0);
+    expect(rejected2).toHaveBeenCalledTimes(0);
+    expect(resolved2).toHaveBeenCalledTimes(0);
 
     expect(queue).toHaveLength(1);
 
     await advanceTime(199);
 
-    expect(canceled1).not.toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).toBeCalledWith(42);
-    expect(canceled2).not.toBeCalled();
-    expect(rejected2).not.toBeCalled();
-    expect(resolved2).not.toBeCalled();
+    expect(canceled1).toHaveBeenCalledTimes(0);
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledWith(42);
+    expect(canceled2).toHaveBeenCalledTimes(0);
+    expect(rejected2).toHaveBeenCalledTimes(0);
+    expect(resolved2).toHaveBeenCalledTimes(0);
 
     expect(queue).toHaveLength(1);
 
     await advanceTime(1);
 
-    expect(canceled1).not.toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).toBeCalledWith(42);
-    expect(canceled2).not.toBeCalled();
-    expect(rejected2).not.toBeCalled();
-    expect(resolved2).toBeCalledWith(64);
+    expect(canceled1).toHaveBeenCalledTimes(0);
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledWith(42);
+    expect(canceled2).toHaveBeenCalledTimes(0);
+    expect(rejected2).toHaveBeenCalledTimes(0);
+    expect(resolved2).toHaveBeenCalledWith(64);
 
     expect(queue).toHaveLength(0);
   });
@@ -396,33 +396,33 @@ describe('Queue', () => {
       }),
     ]);
 
-    expect(canceled1).not.toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).not.toBeCalled();
+    expect(canceled1).toHaveBeenCalledTimes(0);
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledTimes(0);
 
     expect(queue).toHaveLength(1);
 
     await advanceTime(99);
 
-    expect(canceled1).not.toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).not.toBeCalled();
+    expect(canceled1).toHaveBeenCalledTimes(0);
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledTimes(0);
 
     expect(queue).toHaveLength(1);
 
     await advanceTime(1);
 
-    expect(canceled1).not.toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).toBeCalledWith(42);
+    expect(canceled1).toHaveBeenCalledTimes(0);
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledWith(42);
 
     expect(queue).toHaveLength(0);
 
     await advanceTime(50);
 
-    expect(canceled1).not.toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).toBeCalledWith(42);
+    expect(canceled1).toHaveBeenCalledTimes(0);
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledWith(42);
 
     expect(queue).toHaveLength(0);
 
@@ -438,23 +438,23 @@ describe('Queue', () => {
 
     await advanceTime(199);
 
-    expect(canceled1).not.toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).toBeCalledWith(42);
-    expect(canceled2).not.toBeCalled();
-    expect(rejected2).not.toBeCalled();
-    expect(resolved2).not.toBeCalled();
+    expect(canceled1).toHaveBeenCalledTimes(0);
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledWith(42);
+    expect(canceled2).toHaveBeenCalledTimes(0);
+    expect(rejected2).toHaveBeenCalledTimes(0);
+    expect(resolved2).toHaveBeenCalledTimes(0);
 
     expect(queue).toHaveLength(1);
 
     await advanceTime(1);
 
-    expect(canceled1).not.toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).toBeCalledWith(42);
-    expect(canceled2).not.toBeCalled();
-    expect(rejected2).not.toBeCalled();
-    expect(resolved2).toBeCalledWith(64);
+    expect(canceled1).toHaveBeenCalledTimes(0);
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledWith(42);
+    expect(canceled2).toHaveBeenCalledTimes(0);
+    expect(rejected2).toHaveBeenCalledTimes(0);
+    expect(resolved2).toHaveBeenCalledWith(64);
 
     expect(queue).toHaveLength(0);
   });
@@ -481,12 +481,12 @@ describe('Queue', () => {
       }),
     ]);
 
-    expect(canceled1).not.toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).not.toBeCalled();
-    expect(canceled2).not.toBeCalled();
-    expect(rejected2).not.toBeCalled();
-    expect(resolved2).not.toBeCalled();
+    expect(canceled1).toHaveBeenCalledTimes(0);
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledTimes(0);
+    expect(canceled2).toHaveBeenCalledTimes(0);
+    expect(rejected2).toHaveBeenCalledTimes(0);
+    expect(resolved2).toHaveBeenCalledTimes(0);
 
     expect(queue).toHaveLength(2);
 
@@ -502,99 +502,99 @@ describe('Queue', () => {
       canceled: canceled3,
     }));
 
-    expect(canceled1).not.toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).not.toBeCalled();
-    expect(canceled2).not.toBeCalled();
-    expect(rejected2).not.toBeCalled();
-    expect(resolved2).not.toBeCalled();
-    expect(canceled3).not.toBeCalled();
-    expect(rejected3).not.toBeCalled();
-    expect(resolved3).not.toBeCalled();
+    expect(canceled1).toHaveBeenCalledTimes(0);
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledTimes(0);
+    expect(canceled2).toHaveBeenCalledTimes(0);
+    expect(rejected2).toHaveBeenCalledTimes(0);
+    expect(resolved2).toHaveBeenCalledTimes(0);
+    expect(canceled3).toHaveBeenCalledTimes(0);
+    expect(rejected3).toHaveBeenCalledTimes(0);
+    expect(resolved3).toHaveBeenCalledTimes(0);
 
     expect(queue).toHaveLength(3);
 
     await advanceTime(49);
 
-    expect(canceled1).not.toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).not.toBeCalled();
-    expect(canceled2).not.toBeCalled();
-    expect(rejected2).not.toBeCalled();
-    expect(resolved2).not.toBeCalled();
-    expect(canceled3).not.toBeCalled();
-    expect(rejected3).not.toBeCalled();
-    expect(resolved3).not.toBeCalled();
+    expect(canceled1).toHaveBeenCalledTimes(0);
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledTimes(0);
+    expect(canceled2).toHaveBeenCalledTimes(0);
+    expect(rejected2).toHaveBeenCalledTimes(0);
+    expect(resolved2).toHaveBeenCalledTimes(0);
+    expect(canceled3).toHaveBeenCalledTimes(0);
+    expect(rejected3).toHaveBeenCalledTimes(0);
+    expect(resolved3).toHaveBeenCalledTimes(0);
 
     expect(queue).toHaveLength(3);
 
     await advanceTime(1);
 
-    expect(canceled1).not.toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).toBeCalledWith(42);
-    expect(canceled2).not.toBeCalled();
-    expect(rejected2).not.toBeCalled();
-    expect(resolved2).not.toBeCalled();
-    expect(canceled3).not.toBeCalled();
-    expect(rejected3).not.toBeCalled();
-    expect(resolved3).not.toBeCalled();
+    expect(canceled1).toHaveBeenCalledTimes(0);
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledWith(42);
+    expect(canceled2).toHaveBeenCalledTimes(0);
+    expect(rejected2).toHaveBeenCalledTimes(0);
+    expect(resolved2).toHaveBeenCalledTimes(0);
+    expect(canceled3).toHaveBeenCalledTimes(0);
+    expect(rejected3).toHaveBeenCalledTimes(0);
+    expect(resolved3).toHaveBeenCalledTimes(0);
 
     expect(queue).toHaveLength(2);
 
     await advanceTime(299);
 
-    expect(canceled1).not.toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).toBeCalledWith(42);
-    expect(canceled2).not.toBeCalled();
-    expect(rejected2).not.toBeCalled();
-    expect(resolved2).not.toBeCalled();
-    expect(canceled3).not.toBeCalled();
-    expect(rejected3).not.toBeCalled();
-    expect(resolved3).not.toBeCalled();
+    expect(canceled1).toHaveBeenCalledTimes(0);
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledWith(42);
+    expect(canceled2).toHaveBeenCalledTimes(0);
+    expect(rejected2).toHaveBeenCalledTimes(0);
+    expect(resolved2).toHaveBeenCalledTimes(0);
+    expect(canceled3).toHaveBeenCalledTimes(0);
+    expect(rejected3).toHaveBeenCalledTimes(0);
+    expect(resolved3).toHaveBeenCalledTimes(0);
 
     expect(queue).toHaveLength(2);
 
     await advanceTime(1);
 
-    expect(canceled1).not.toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).toBeCalledWith(42);
-    expect(canceled2).not.toBeCalled();
-    expect(rejected2).not.toBeCalled();
-    expect(resolved2).not.toBeCalled();
-    expect(canceled3).not.toBeCalled();
-    expect(rejected3).not.toBeCalled();
-    expect(resolved3).toBeCalledWith(81);
+    expect(canceled1).toHaveBeenCalledTimes(0);
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledWith(42);
+    expect(canceled2).toHaveBeenCalledTimes(0);
+    expect(rejected2).toHaveBeenCalledTimes(0);
+    expect(resolved2).toHaveBeenCalledTimes(0);
+    expect(canceled3).toHaveBeenCalledTimes(0);
+    expect(rejected3).toHaveBeenCalledTimes(0);
+    expect(resolved3).toHaveBeenCalledWith(81);
 
     expect(queue).toHaveLength(1);
 
     await advanceTime(199);
 
-    expect(canceled1).not.toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).toBeCalledWith(42);
-    expect(canceled2).not.toBeCalled();
-    expect(rejected2).not.toBeCalled();
-    expect(resolved2).not.toBeCalled();
-    expect(canceled3).not.toBeCalled();
-    expect(rejected3).not.toBeCalled();
-    expect(resolved3).toBeCalledWith(81);
+    expect(canceled1).toHaveBeenCalledTimes(0);
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledWith(42);
+    expect(canceled2).toHaveBeenCalledTimes(0);
+    expect(rejected2).toHaveBeenCalledTimes(0);
+    expect(resolved2).toHaveBeenCalledTimes(0);
+    expect(canceled3).toHaveBeenCalledTimes(0);
+    expect(rejected3).toHaveBeenCalledTimes(0);
+    expect(resolved3).toHaveBeenCalledWith(81);
 
     expect(queue).toHaveLength(1);
 
     await advanceTime(1);
 
-    expect(canceled1).not.toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).toBeCalledWith(42);
-    expect(canceled2).not.toBeCalled();
-    expect(rejected2).not.toBeCalled();
-    expect(resolved2).toBeCalledWith(64);
-    expect(canceled3).not.toBeCalled();
-    expect(rejected3).not.toBeCalled();
-    expect(resolved3).toBeCalledWith(81);
+    expect(canceled1).toHaveBeenCalledTimes(0);
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledWith(42);
+    expect(canceled2).toHaveBeenCalledTimes(0);
+    expect(rejected2).toHaveBeenCalledTimes(0);
+    expect(resolved2).toHaveBeenCalledWith(64);
+    expect(canceled3).toHaveBeenCalledTimes(0);
+    expect(rejected3).toHaveBeenCalledTimes(0);
+    expect(resolved3).toHaveBeenCalledWith(81);
 
     expect(queue).toHaveLength(0);
   });
@@ -621,12 +621,12 @@ describe('Queue', () => {
       }),
     ]);
 
-    expect(canceled1).not.toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).not.toBeCalled();
-    expect(canceled2).not.toBeCalled();
-    expect(rejected2).not.toBeCalled();
-    expect(resolved2).not.toBeCalled();
+    expect(canceled1).toHaveBeenCalledTimes(0);
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledTimes(0);
+    expect(canceled2).toHaveBeenCalledTimes(0);
+    expect(rejected2).toHaveBeenCalledTimes(0);
+    expect(resolved2).toHaveBeenCalledTimes(0);
 
     expect(queue).toHaveLength(2);
 
@@ -646,71 +646,71 @@ describe('Queue', () => {
 
     await flushPromises();
 
-    expect(canceled1).toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).not.toBeCalled();
-    expect(canceled2).not.toBeCalled();
-    expect(rejected2).not.toBeCalled();
-    expect(resolved2).not.toBeCalled();
-    expect(canceled3).not.toBeCalled();
-    expect(rejected3).not.toBeCalled();
-    expect(resolved3).not.toBeCalled();
+    expect(canceled1).toHaveBeenCalled();
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledTimes(0);
+    expect(canceled2).toHaveBeenCalledTimes(0);
+    expect(rejected2).toHaveBeenCalledTimes(0);
+    expect(resolved2).toHaveBeenCalledTimes(0);
+    expect(canceled3).toHaveBeenCalledTimes(0);
+    expect(rejected3).toHaveBeenCalledTimes(0);
+    expect(resolved3).toHaveBeenCalledTimes(0);
 
     expect(queue).toHaveLength(2);
 
     await advanceTime(299);
 
-    expect(canceled1).toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).not.toBeCalled();
-    expect(canceled2).not.toBeCalled();
-    expect(rejected2).not.toBeCalled();
-    expect(resolved2).not.toBeCalled();
-    expect(canceled3).not.toBeCalled();
-    expect(rejected3).not.toBeCalled();
-    expect(resolved3).not.toBeCalled();
+    expect(canceled1).toHaveBeenCalled();
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledTimes(0);
+    expect(canceled2).toHaveBeenCalledTimes(0);
+    expect(rejected2).toHaveBeenCalledTimes(0);
+    expect(resolved2).toHaveBeenCalledTimes(0);
+    expect(canceled3).toHaveBeenCalledTimes(0);
+    expect(rejected3).toHaveBeenCalledTimes(0);
+    expect(resolved3).toHaveBeenCalledTimes(0);
 
     expect(queue).toHaveLength(2);
 
     await advanceTime(1);
 
-    expect(canceled1).toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).not.toBeCalled();
-    expect(canceled2).not.toBeCalled();
-    expect(rejected2).not.toBeCalled();
-    expect(resolved2).not.toBeCalled();
-    expect(canceled3).not.toBeCalled();
-    expect(rejected3).not.toBeCalled();
-    expect(resolved3).toBeCalledWith(81);
+    expect(canceled1).toHaveBeenCalled();
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledTimes(0);
+    expect(canceled2).toHaveBeenCalledTimes(0);
+    expect(rejected2).toHaveBeenCalledTimes(0);
+    expect(resolved2).toHaveBeenCalledTimes(0);
+    expect(canceled3).toHaveBeenCalledTimes(0);
+    expect(rejected3).toHaveBeenCalledTimes(0);
+    expect(resolved3).toHaveBeenCalledWith(81);
 
     expect(queue).toHaveLength(1);
 
     await advanceTime(199);
 
-    expect(canceled1).toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).not.toBeCalled();
-    expect(canceled2).not.toBeCalled();
-    expect(rejected2).not.toBeCalled();
-    expect(resolved2).not.toBeCalled();
-    expect(canceled3).not.toBeCalled();
-    expect(rejected3).not.toBeCalled();
-    expect(resolved3).toBeCalledWith(81);
+    expect(canceled1).toHaveBeenCalled();
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledTimes(0);
+    expect(canceled2).toHaveBeenCalledTimes(0);
+    expect(rejected2).toHaveBeenCalledTimes(0);
+    expect(resolved2).toHaveBeenCalledTimes(0);
+    expect(canceled3).toHaveBeenCalledTimes(0);
+    expect(rejected3).toHaveBeenCalledTimes(0);
+    expect(resolved3).toHaveBeenCalledWith(81);
 
     expect(queue).toHaveLength(1);
 
     await advanceTime(1);
 
-    expect(canceled1).toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).not.toBeCalled();
-    expect(canceled2).not.toBeCalled();
-    expect(rejected2).not.toBeCalled();
-    expect(resolved2).toBeCalledWith(64);
-    expect(canceled3).not.toBeCalled();
-    expect(rejected3).not.toBeCalled();
-    expect(resolved3).toBeCalledWith(81);
+    expect(canceled1).toHaveBeenCalled();
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledTimes(0);
+    expect(canceled2).toHaveBeenCalledTimes(0);
+    expect(rejected2).toHaveBeenCalledTimes(0);
+    expect(resolved2).toHaveBeenCalledWith(64);
+    expect(canceled3).toHaveBeenCalledTimes(0);
+    expect(rejected3).toHaveBeenCalledTimes(0);
+    expect(resolved3).toHaveBeenCalledWith(81);
 
     expect(queue).toHaveLength(0);
   });
@@ -737,56 +737,56 @@ describe('Queue', () => {
       }),
     ], comparator);
 
-    expect(canceled1).not.toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).not.toBeCalled();
-    expect(canceled2).not.toBeCalled();
-    expect(rejected2).not.toBeCalled();
-    expect(resolved2).not.toBeCalled();
+    expect(canceled1).toHaveBeenCalledTimes(0);
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledTimes(0);
+    expect(canceled2).toHaveBeenCalledTimes(0);
+    expect(rejected2).toHaveBeenCalledTimes(0);
+    expect(resolved2).toHaveBeenCalledTimes(0);
 
     expect(queue).toHaveLength(1);
 
     await advanceTime(99);
 
-    expect(canceled1).not.toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).not.toBeCalled();
-    expect(canceled2).not.toBeCalled();
-    expect(rejected2).not.toBeCalled();
-    expect(resolved2).not.toBeCalled();
+    expect(canceled1).toHaveBeenCalledTimes(0);
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledTimes(0);
+    expect(canceled2).toHaveBeenCalledTimes(0);
+    expect(rejected2).toHaveBeenCalledTimes(0);
+    expect(resolved2).toHaveBeenCalledTimes(0);
 
     expect(queue).toHaveLength(1);
 
     await advanceTime(1);
 
-    expect(canceled1).not.toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).toBeCalledWith(42);
-    expect(canceled2).not.toBeCalled();
-    expect(rejected2).not.toBeCalled();
-    expect(resolved2).not.toBeCalled();
+    expect(canceled1).toHaveBeenCalledTimes(0);
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledWith(42);
+    expect(canceled2).toHaveBeenCalledTimes(0);
+    expect(rejected2).toHaveBeenCalledTimes(0);
+    expect(resolved2).toHaveBeenCalledTimes(0);
 
     expect(queue).toHaveLength(0);
 
     await advanceTime(199);
 
-    expect(canceled1).not.toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).toBeCalledWith(42);
-    expect(canceled2).not.toBeCalled();
-    expect(rejected2).not.toBeCalled();
-    expect(resolved2).not.toBeCalled();
+    expect(canceled1).toHaveBeenCalledTimes(0);
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledWith(42);
+    expect(canceled2).toHaveBeenCalledTimes(0);
+    expect(rejected2).toHaveBeenCalledTimes(0);
+    expect(resolved2).toHaveBeenCalledTimes(0);
 
     expect(queue).toHaveLength(0);
 
     await advanceTime(1);
 
-    expect(canceled1).not.toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).toBeCalledWith(42);
-    expect(canceled2).not.toBeCalled();
-    expect(rejected2).not.toBeCalled();
-    expect(resolved2).not.toBeCalled();
+    expect(canceled1).toHaveBeenCalledTimes(0);
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledWith(42);
+    expect(canceled2).toHaveBeenCalledTimes(0);
+    expect(rejected2).toHaveBeenCalledTimes(0);
+    expect(resolved2).toHaveBeenCalledTimes(0);
 
     expect(queue).toHaveLength(0);
   });
@@ -822,15 +822,15 @@ describe('Queue', () => {
       }),
     ], comparator);
 
-    expect(canceled1).not.toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).not.toBeCalled();
-    expect(canceled2).not.toBeCalled();
-    expect(rejected2).not.toBeCalled();
-    expect(resolved2).not.toBeCalled();
-    expect(canceled4).not.toBeCalled();
-    expect(rejected4).not.toBeCalled();
-    expect(resolved4).not.toBeCalled();
+    expect(canceled1).toHaveBeenCalledTimes(0);
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledTimes(0);
+    expect(canceled2).toHaveBeenCalledTimes(0);
+    expect(rejected2).toHaveBeenCalledTimes(0);
+    expect(resolved2).toHaveBeenCalledTimes(0);
+    expect(canceled4).toHaveBeenCalledTimes(0);
+    expect(rejected4).toHaveBeenCalledTimes(0);
+    expect(resolved4).toHaveBeenCalledTimes(0);
 
     expect(queue).toHaveLength(3);
 
@@ -846,120 +846,120 @@ describe('Queue', () => {
       canceled: canceled3,
     }));
 
-    expect(canceled1).not.toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).not.toBeCalled();
-    expect(canceled2).not.toBeCalled();
-    expect(rejected2).not.toBeCalled();
-    expect(resolved2).not.toBeCalled();
-    expect(canceled3).not.toBeCalled();
-    expect(rejected3).not.toBeCalled();
-    expect(resolved3).not.toBeCalled();
-    expect(canceled4).not.toBeCalled();
-    expect(rejected4).not.toBeCalled();
-    expect(resolved4).not.toBeCalled();
+    expect(canceled1).toHaveBeenCalledTimes(0);
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledTimes(0);
+    expect(canceled2).toHaveBeenCalledTimes(0);
+    expect(rejected2).toHaveBeenCalledTimes(0);
+    expect(resolved2).toHaveBeenCalledTimes(0);
+    expect(canceled3).toHaveBeenCalledTimes(0);
+    expect(rejected3).toHaveBeenCalledTimes(0);
+    expect(resolved3).toHaveBeenCalledTimes(0);
+    expect(canceled4).toHaveBeenCalledTimes(0);
+    expect(rejected4).toHaveBeenCalledTimes(0);
+    expect(resolved4).toHaveBeenCalledTimes(0);
 
     expect(queue).toHaveLength(3);
 
     await advanceTime(49);
 
-    expect(canceled1).not.toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).not.toBeCalled();
-    expect(canceled2).not.toBeCalled();
-    expect(rejected2).not.toBeCalled();
-    expect(resolved2).not.toBeCalled();
-    expect(canceled3).not.toBeCalled();
-    expect(rejected3).not.toBeCalled();
-    expect(resolved3).not.toBeCalled();
-    expect(canceled4).not.toBeCalled();
-    expect(rejected4).not.toBeCalled();
-    expect(resolved4).not.toBeCalled();
+    expect(canceled1).toHaveBeenCalledTimes(0);
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledTimes(0);
+    expect(canceled2).toHaveBeenCalledTimes(0);
+    expect(rejected2).toHaveBeenCalledTimes(0);
+    expect(resolved2).toHaveBeenCalledTimes(0);
+    expect(canceled3).toHaveBeenCalledTimes(0);
+    expect(rejected3).toHaveBeenCalledTimes(0);
+    expect(resolved3).toHaveBeenCalledTimes(0);
+    expect(canceled4).toHaveBeenCalledTimes(0);
+    expect(rejected4).toHaveBeenCalledTimes(0);
+    expect(resolved4).toHaveBeenCalledTimes(0);
 
     expect(queue).toHaveLength(3);
 
     await advanceTime(1);
 
-    expect(canceled1).not.toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).toBeCalledWith(42);
-    expect(canceled2).not.toBeCalled();
-    expect(rejected2).not.toBeCalled();
-    expect(resolved2).not.toBeCalled();
-    expect(canceled3).not.toBeCalled();
-    expect(rejected3).not.toBeCalled();
-    expect(resolved3).not.toBeCalled();
-    expect(canceled4).not.toBeCalled();
-    expect(rejected4).not.toBeCalled();
-    expect(resolved4).not.toBeCalled();
+    expect(canceled1).toHaveBeenCalledTimes(0);
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledWith(42);
+    expect(canceled2).toHaveBeenCalledTimes(0);
+    expect(rejected2).toHaveBeenCalledTimes(0);
+    expect(resolved2).toHaveBeenCalledTimes(0);
+    expect(canceled3).toHaveBeenCalledTimes(0);
+    expect(rejected3).toHaveBeenCalledTimes(0);
+    expect(resolved3).toHaveBeenCalledTimes(0);
+    expect(canceled4).toHaveBeenCalledTimes(0);
+    expect(rejected4).toHaveBeenCalledTimes(0);
+    expect(resolved4).toHaveBeenCalledTimes(0);
 
     expect(queue).toHaveLength(2);
 
     await advanceTime(299);
 
-    expect(canceled1).not.toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).toBeCalledWith(42);
-    expect(canceled2).not.toBeCalled();
-    expect(rejected2).not.toBeCalled();
-    expect(resolved2).not.toBeCalled();
-    expect(canceled3).not.toBeCalled();
-    expect(rejected3).not.toBeCalled();
-    expect(resolved3).not.toBeCalled();
-    expect(canceled4).not.toBeCalled();
-    expect(rejected4).not.toBeCalled();
-    expect(resolved4).not.toBeCalled();
+    expect(canceled1).toHaveBeenCalledTimes(0);
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledWith(42);
+    expect(canceled2).toHaveBeenCalledTimes(0);
+    expect(rejected2).toHaveBeenCalledTimes(0);
+    expect(resolved2).toHaveBeenCalledTimes(0);
+    expect(canceled3).toHaveBeenCalledTimes(0);
+    expect(rejected3).toHaveBeenCalledTimes(0);
+    expect(resolved3).toHaveBeenCalledTimes(0);
+    expect(canceled4).toHaveBeenCalledTimes(0);
+    expect(rejected4).toHaveBeenCalledTimes(0);
+    expect(resolved4).toHaveBeenCalledTimes(0);
 
     expect(queue).toHaveLength(2);
 
     await advanceTime(1);
 
-    expect(canceled1).not.toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).toBeCalledWith(42);
-    expect(canceled2).not.toBeCalled();
-    expect(rejected2).not.toBeCalled();
-    expect(resolved2).not.toBeCalled();
-    expect(canceled3).not.toBeCalled();
-    expect(rejected3).not.toBeCalled();
-    expect(resolved3).toBeCalledWith(81);
-    expect(canceled4).not.toBeCalled();
-    expect(rejected4).not.toBeCalled();
-    expect(resolved4).not.toBeCalled();
+    expect(canceled1).toHaveBeenCalledTimes(0);
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledWith(42);
+    expect(canceled2).toHaveBeenCalledTimes(0);
+    expect(rejected2).toHaveBeenCalledTimes(0);
+    expect(resolved2).toHaveBeenCalledTimes(0);
+    expect(canceled3).toHaveBeenCalledTimes(0);
+    expect(rejected3).toHaveBeenCalledTimes(0);
+    expect(resolved3).toHaveBeenCalledWith(81);
+    expect(canceled4).toHaveBeenCalledTimes(0);
+    expect(rejected4).toHaveBeenCalledTimes(0);
+    expect(resolved4).toHaveBeenCalledTimes(0);
 
     expect(queue).toHaveLength(1);
 
     await advanceTime(199);
 
-    expect(canceled1).not.toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).toBeCalledWith(42);
-    expect(canceled2).not.toBeCalled();
-    expect(rejected2).not.toBeCalled();
-    expect(resolved2).not.toBeCalled();
-    expect(canceled3).not.toBeCalled();
-    expect(rejected3).not.toBeCalled();
-    expect(resolved3).toBeCalledWith(81);
-    expect(canceled4).not.toBeCalled();
-    expect(rejected4).not.toBeCalled();
-    expect(resolved4).not.toBeCalled();
+    expect(canceled1).toHaveBeenCalledTimes(0);
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledWith(42);
+    expect(canceled2).toHaveBeenCalledTimes(0);
+    expect(rejected2).toHaveBeenCalledTimes(0);
+    expect(resolved2).toHaveBeenCalledTimes(0);
+    expect(canceled3).toHaveBeenCalledTimes(0);
+    expect(rejected3).toHaveBeenCalledTimes(0);
+    expect(resolved3).toHaveBeenCalledWith(81);
+    expect(canceled4).toHaveBeenCalledTimes(0);
+    expect(rejected4).toHaveBeenCalledTimes(0);
+    expect(resolved4).toHaveBeenCalledTimes(0);
 
     expect(queue).toHaveLength(1);
 
     await advanceTime(1);
 
-    expect(canceled1).not.toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).toBeCalledWith(42);
-    expect(canceled2).not.toBeCalled();
-    expect(rejected2).not.toBeCalled();
-    expect(resolved2).toBeCalledWith(64);
-    expect(canceled3).not.toBeCalled();
-    expect(rejected3).not.toBeCalled();
-    expect(resolved3).toBeCalledWith(81);
-    expect(canceled4).not.toBeCalled();
-    expect(rejected4).not.toBeCalled();
-    expect(resolved4).not.toBeCalled();
+    expect(canceled1).toHaveBeenCalledTimes(0);
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledWith(42);
+    expect(canceled2).toHaveBeenCalledTimes(0);
+    expect(rejected2).toHaveBeenCalledTimes(0);
+    expect(resolved2).toHaveBeenCalledWith(64);
+    expect(canceled3).toHaveBeenCalledTimes(0);
+    expect(rejected3).toHaveBeenCalledTimes(0);
+    expect(resolved3).toHaveBeenCalledWith(81);
+    expect(canceled4).toHaveBeenCalledTimes(0);
+    expect(rejected4).toHaveBeenCalledTimes(0);
+    expect(resolved4).toHaveBeenCalledTimes(0);
 
     expect(queue).toHaveLength(0);
   });
@@ -995,15 +995,15 @@ describe('Queue', () => {
       }),
     ], comparator);
 
-    expect(canceled1).not.toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).not.toBeCalled();
-    expect(canceled2).not.toBeCalled();
-    expect(rejected2).not.toBeCalled();
-    expect(resolved2).not.toBeCalled();
-    expect(canceled4).not.toBeCalled();
-    expect(rejected4).not.toBeCalled();
-    expect(resolved4).not.toBeCalled();
+    expect(canceled1).toHaveBeenCalledTimes(0);
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledTimes(0);
+    expect(canceled2).toHaveBeenCalledTimes(0);
+    expect(rejected2).toHaveBeenCalledTimes(0);
+    expect(resolved2).toHaveBeenCalledTimes(0);
+    expect(canceled4).toHaveBeenCalledTimes(0);
+    expect(rejected4).toHaveBeenCalledTimes(0);
+    expect(resolved4).toHaveBeenCalledTimes(0);
 
     expect(queue).toHaveLength(3);
 
@@ -1019,120 +1019,120 @@ describe('Queue', () => {
       canceled: canceled3,
     }));
 
-    expect(canceled1).not.toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).not.toBeCalled();
-    expect(canceled2).not.toBeCalled();
-    expect(rejected2).not.toBeCalled();
-    expect(resolved2).not.toBeCalled();
-    expect(canceled3).not.toBeCalled();
-    expect(rejected3).not.toBeCalled();
-    expect(resolved3).not.toBeCalled();
-    expect(canceled4).not.toBeCalled();
-    expect(rejected4).not.toBeCalled();
-    expect(resolved4).not.toBeCalled();
+    expect(canceled1).toHaveBeenCalledTimes(0);
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledTimes(0);
+    expect(canceled2).toHaveBeenCalledTimes(0);
+    expect(rejected2).toHaveBeenCalledTimes(0);
+    expect(resolved2).toHaveBeenCalledTimes(0);
+    expect(canceled3).toHaveBeenCalledTimes(0);
+    expect(rejected3).toHaveBeenCalledTimes(0);
+    expect(resolved3).toHaveBeenCalledTimes(0);
+    expect(canceled4).toHaveBeenCalledTimes(0);
+    expect(rejected4).toHaveBeenCalledTimes(0);
+    expect(resolved4).toHaveBeenCalledTimes(0);
 
     expect(queue).toHaveLength(3);
 
     await advanceTime(49);
 
-    expect(canceled1).not.toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).not.toBeCalled();
-    expect(canceled2).not.toBeCalled();
-    expect(rejected2).not.toBeCalled();
-    expect(resolved2).not.toBeCalled();
-    expect(canceled3).not.toBeCalled();
-    expect(rejected3).not.toBeCalled();
-    expect(resolved3).not.toBeCalled();
-    expect(canceled4).not.toBeCalled();
-    expect(rejected4).not.toBeCalled();
-    expect(resolved4).not.toBeCalled();
+    expect(canceled1).toHaveBeenCalledTimes(0);
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledTimes(0);
+    expect(canceled2).toHaveBeenCalledTimes(0);
+    expect(rejected2).toHaveBeenCalledTimes(0);
+    expect(resolved2).toHaveBeenCalledTimes(0);
+    expect(canceled3).toHaveBeenCalledTimes(0);
+    expect(rejected3).toHaveBeenCalledTimes(0);
+    expect(resolved3).toHaveBeenCalledTimes(0);
+    expect(canceled4).toHaveBeenCalledTimes(0);
+    expect(rejected4).toHaveBeenCalledTimes(0);
+    expect(resolved4).toHaveBeenCalledTimes(0);
 
     expect(queue).toHaveLength(3);
 
     await advanceTime(1);
 
-    expect(canceled1).not.toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).toBeCalledWith(42);
-    expect(canceled2).not.toBeCalled();
-    expect(rejected2).not.toBeCalled();
-    expect(resolved2).not.toBeCalled();
-    expect(canceled3).not.toBeCalled();
-    expect(rejected3).not.toBeCalled();
-    expect(resolved3).not.toBeCalled();
-    expect(canceled4).not.toBeCalled();
-    expect(rejected4).not.toBeCalled();
-    expect(resolved4).not.toBeCalled();
+    expect(canceled1).toHaveBeenCalledTimes(0);
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledWith(42);
+    expect(canceled2).toHaveBeenCalledTimes(0);
+    expect(rejected2).toHaveBeenCalledTimes(0);
+    expect(resolved2).toHaveBeenCalledTimes(0);
+    expect(canceled3).toHaveBeenCalledTimes(0);
+    expect(rejected3).toHaveBeenCalledTimes(0);
+    expect(resolved3).toHaveBeenCalledTimes(0);
+    expect(canceled4).toHaveBeenCalledTimes(0);
+    expect(rejected4).toHaveBeenCalledTimes(0);
+    expect(resolved4).toHaveBeenCalledTimes(0);
 
     expect(queue).toHaveLength(2);
 
     await advanceTime(299);
 
-    expect(canceled1).not.toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).toBeCalledWith(42);
-    expect(canceled2).not.toBeCalled();
-    expect(rejected2).not.toBeCalled();
-    expect(resolved2).not.toBeCalled();
-    expect(canceled3).not.toBeCalled();
-    expect(rejected3).not.toBeCalled();
-    expect(resolved3).not.toBeCalled();
-    expect(canceled4).not.toBeCalled();
-    expect(rejected4).not.toBeCalled();
-    expect(resolved4).not.toBeCalled();
+    expect(canceled1).toHaveBeenCalledTimes(0);
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledWith(42);
+    expect(canceled2).toHaveBeenCalledTimes(0);
+    expect(rejected2).toHaveBeenCalledTimes(0);
+    expect(resolved2).toHaveBeenCalledTimes(0);
+    expect(canceled3).toHaveBeenCalledTimes(0);
+    expect(rejected3).toHaveBeenCalledTimes(0);
+    expect(resolved3).toHaveBeenCalledTimes(0);
+    expect(canceled4).toHaveBeenCalledTimes(0);
+    expect(rejected4).toHaveBeenCalledTimes(0);
+    expect(resolved4).toHaveBeenCalledTimes(0);
 
     expect(queue).toHaveLength(2);
 
     await advanceTime(1);
 
-    expect(canceled1).not.toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).toBeCalledWith(42);
-    expect(canceled2).not.toBeCalled();
-    expect(rejected2).not.toBeCalled();
-    expect(resolved2).not.toBeCalled();
-    expect(canceled3).not.toBeCalled();
-    expect(rejected3).not.toBeCalled();
-    expect(resolved3).not.toBeCalled();
-    expect(canceled4).not.toBeCalled();
-    expect(rejected4).not.toBeCalled();
-    expect(resolved4).toBeCalledWith(81);
+    expect(canceled1).toHaveBeenCalledTimes(0);
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledWith(42);
+    expect(canceled2).toHaveBeenCalledTimes(0);
+    expect(rejected2).toHaveBeenCalledTimes(0);
+    expect(resolved2).toHaveBeenCalledTimes(0);
+    expect(canceled3).toHaveBeenCalledTimes(0);
+    expect(rejected3).toHaveBeenCalledTimes(0);
+    expect(resolved3).toHaveBeenCalledTimes(0);
+    expect(canceled4).toHaveBeenCalledTimes(0);
+    expect(rejected4).toHaveBeenCalledTimes(0);
+    expect(resolved4).toHaveBeenCalledWith(81);
 
     expect(queue).toHaveLength(1);
 
     await advanceTime(199);
 
-    expect(canceled1).not.toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).toBeCalledWith(42);
-    expect(canceled2).not.toBeCalled();
-    expect(rejected2).not.toBeCalled();
-    expect(resolved2).not.toBeCalled();
-    expect(canceled3).not.toBeCalled();
-    expect(rejected3).not.toBeCalled();
-    expect(resolved3).not.toBeCalled();
-    expect(canceled4).not.toBeCalled();
-    expect(rejected4).not.toBeCalled();
-    expect(resolved4).toBeCalledWith(81);
+    expect(canceled1).toHaveBeenCalledTimes(0);
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledWith(42);
+    expect(canceled2).toHaveBeenCalledTimes(0);
+    expect(rejected2).toHaveBeenCalledTimes(0);
+    expect(resolved2).toHaveBeenCalledTimes(0);
+    expect(canceled3).toHaveBeenCalledTimes(0);
+    expect(rejected3).toHaveBeenCalledTimes(0);
+    expect(resolved3).toHaveBeenCalledTimes(0);
+    expect(canceled4).toHaveBeenCalledTimes(0);
+    expect(rejected4).toHaveBeenCalledTimes(0);
+    expect(resolved4).toHaveBeenCalledWith(81);
 
     expect(queue).toHaveLength(1);
 
     await advanceTime(1);
 
-    expect(canceled1).not.toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).toBeCalledWith(42);
-    expect(canceled2).not.toBeCalled();
-    expect(rejected2).not.toBeCalled();
-    expect(resolved2).toBeCalledWith(64);
-    expect(canceled3).not.toBeCalled();
-    expect(rejected3).not.toBeCalled();
-    expect(resolved3).not.toBeCalled();
-    expect(canceled4).not.toBeCalled();
-    expect(rejected4).not.toBeCalled();
-    expect(resolved4).toBeCalledWith(81);
+    expect(canceled1).toHaveBeenCalledTimes(0);
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledWith(42);
+    expect(canceled2).toHaveBeenCalledTimes(0);
+    expect(rejected2).toHaveBeenCalledTimes(0);
+    expect(resolved2).toHaveBeenCalledWith(64);
+    expect(canceled3).toHaveBeenCalledTimes(0);
+    expect(rejected3).toHaveBeenCalledTimes(0);
+    expect(resolved3).toHaveBeenCalledTimes(0);
+    expect(canceled4).toHaveBeenCalledTimes(0);
+    expect(rejected4).toHaveBeenCalledTimes(0);
+    expect(resolved4).toHaveBeenCalledWith(81);
 
     expect(queue).toHaveLength(0);
   });
@@ -1159,23 +1159,23 @@ describe('Queue', () => {
       }),
     ]);
 
-    expect(canceled1).not.toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).not.toBeCalled();
-    expect(canceled2).not.toBeCalled();
-    expect(rejected2).not.toBeCalled();
-    expect(resolved2).not.toBeCalled();
+    expect(canceled1).toHaveBeenCalledTimes(0);
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledTimes(0);
+    expect(canceled2).toHaveBeenCalledTimes(0);
+    expect(rejected2).toHaveBeenCalledTimes(0);
+    expect(resolved2).toHaveBeenCalledTimes(0);
 
     expect(queue).toHaveLength(2);
 
     await advanceTime(50);
 
-    expect(canceled1).not.toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).not.toBeCalled();
-    expect(canceled2).not.toBeCalled();
-    expect(rejected2).not.toBeCalled();
-    expect(resolved2).not.toBeCalled();
+    expect(canceled1).toHaveBeenCalledTimes(0);
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledTimes(0);
+    expect(canceled2).toHaveBeenCalledTimes(0);
+    expect(rejected2).toHaveBeenCalledTimes(0);
+    expect(resolved2).toHaveBeenCalledTimes(0);
 
     expect(queue).toHaveLength(2);
 
@@ -1184,12 +1184,12 @@ describe('Queue', () => {
 
     await flushPromises();
 
-    expect(canceled1).toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).not.toBeCalled();
-    expect(canceled2).not.toBeCalled();
-    expect(rejected2).not.toBeCalled();
-    expect(resolved2).not.toBeCalled();
+    expect(canceled1).toHaveBeenCalled();
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledTimes(0);
+    expect(canceled2).toHaveBeenCalledTimes(0);
+    expect(rejected2).toHaveBeenCalledTimes(0);
+    expect(resolved2).toHaveBeenCalledTimes(0);
 
     expect(queue).toHaveLength(0);
 
@@ -1206,56 +1206,56 @@ describe('Queue', () => {
       }),
     );
 
-    expect(canceled1).toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).not.toBeCalled();
-    expect(canceled2).not.toBeCalled();
-    expect(rejected2).not.toBeCalled();
-    expect(resolved2).not.toBeCalled();
+    expect(canceled1).toHaveBeenCalled();
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledTimes(0);
+    expect(canceled2).toHaveBeenCalledTimes(0);
+    expect(rejected2).toHaveBeenCalledTimes(0);
+    expect(resolved2).toHaveBeenCalledTimes(0);
 
     expect(queue).toHaveLength(2);
 
     await advanceTime(99);
 
-    expect(canceled1).toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).not.toBeCalled();
-    expect(canceled2).not.toBeCalled();
-    expect(rejected2).not.toBeCalled();
-    expect(resolved2).not.toBeCalled();
+    expect(canceled1).toHaveBeenCalled();
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledTimes(0);
+    expect(canceled2).toHaveBeenCalledTimes(0);
+    expect(rejected2).toHaveBeenCalledTimes(0);
+    expect(resolved2).toHaveBeenCalledTimes(0);
 
     expect(queue).toHaveLength(2);
 
     await advanceTime(1);
 
-    expect(canceled1).toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).toBeCalledWith(42);
-    expect(canceled2).not.toBeCalled();
-    expect(rejected2).not.toBeCalled();
-    expect(resolved2).not.toBeCalled();
+    expect(canceled1).toHaveBeenCalled();
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledWith(42);
+    expect(canceled2).toHaveBeenCalledTimes(0);
+    expect(rejected2).toHaveBeenCalledTimes(0);
+    expect(resolved2).toHaveBeenCalledTimes(0);
 
     expect(queue).toHaveLength(1);
 
     await advanceTime(199);
 
-    expect(canceled1).toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).toBeCalledWith(42);
-    expect(canceled2).not.toBeCalled();
-    expect(rejected2).not.toBeCalled();
-    expect(resolved2).not.toBeCalled();
+    expect(canceled1).toHaveBeenCalled();
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledWith(42);
+    expect(canceled2).toHaveBeenCalledTimes(0);
+    expect(rejected2).toHaveBeenCalledTimes(0);
+    expect(resolved2).toHaveBeenCalledTimes(0);
 
     expect(queue).toHaveLength(1);
 
     await advanceTime(1);
 
-    expect(canceled1).toBeCalled();
-    expect(rejected1).not.toBeCalled();
-    expect(resolved1).toBeCalledWith(42);
-    expect(canceled2).not.toBeCalled();
-    expect(rejected2).not.toBeCalled();
-    expect(resolved2).toBeCalledWith(64);
+    expect(canceled1).toHaveBeenCalled();
+    expect(rejected1).toHaveBeenCalledTimes(0);
+    expect(resolved1).toHaveBeenCalledWith(42);
+    expect(canceled2).toHaveBeenCalledTimes(0);
+    expect(rejected2).toHaveBeenCalledTimes(0);
+    expect(resolved2).toHaveBeenCalledWith(64);
 
     expect(queue).toHaveLength(0);
   });
