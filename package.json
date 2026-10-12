@@ -1,6 +1,6 @@
 {
   "name": "t-queues",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "license": "MIT",
   "main": "dist/t-queues.js",
   "module": "dist/t-queues.esm.js",
