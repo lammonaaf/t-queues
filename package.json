@@ -1,6 +1,6 @@
 {
   "name": "t-queues",
-  "version": "0.3.0",
+  "version": "2.1.0",
   "license": "MIT",
   "main": "dist/t-queues.js",
   "module": "dist/t-queues.esm.js",
@@ -51,7 +51,7 @@
     "queue"
   ],
   "dependencies": {
-    "t-tasks": "^2.1.0"
+    "t-tasks": "^2.1.1"
   },
   "packageManager": "yarn@1.22.21+sha1.1959a18351b811cdeedbd484a8f86c3cc3bbaf72",
   "resolutions": {
