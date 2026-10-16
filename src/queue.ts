@@ -44,7 +44,15 @@ const debounced = (handler: () => void) => {
   }
 }
 
+const reportError = (error: unknown) => {
+  if (typeof globalThis.reportError === 'function') globalThis.reportError(error);
+}
+
 class QueueClass<T extends Invokable<any>> implements Queue<T> {
+  private current: T | null = null;
+
+  private generation = new Set<T>();
+
   private observer = debounced(() => this.observe());
 
   private _task = monitored<Task<any> | null>(null, (_, c) => {
@@ -55,14 +63,28 @@ class QueueClass<T extends Invokable<any>> implements Queue<T> {
   private _queue = monitored<T[]>([], (p, c) => {
     this.observer();
 
-    const filtered = c.filter((a, index, rest) => index <= rest.findIndex((b) => this.comparator(a, b)));
+    const filtered = c.filter((a, index, rest) => {
+      if (this.generation.has(a) && !p.includes(a)) return false;
 
-    return filtered.length === p.length && filtered.every((a, index) => this.comparator(a, p[index])) ? p : filtered;
+      if (this.current && !this.task?.resolved() && this.comparator(a, this.current)) return false;
+
+      const first = rest.findIndex((b) => this.comparator(a, b));
+
+      return first < 0 || index === first;
+    });
+
+    return filtered;
   });
 
   observe() {
-    if (this.task === null && this.queue.length > 0) {
-      this._load();
+    this.generation.clear();
+
+    try {
+      while (this.task === null && this.queue.length > 0) {
+        this._load();
+      }
+    } finally {
+      this.generation.clear();
     }
   }
 
@@ -91,17 +113,46 @@ class QueueClass<T extends Invokable<any>> implements Queue<T> {
   _load() {
     const first = this._shift();
 
-    const onDone = () => this._task.value = null;
+    if (!first) return;
 
-    this._task.value = first.invoke().matchTap({
+    this.current = first;
+    this.generation.add(first);
+
+    let running: Task<any>;
+    try {
+      running = first.invoke();
+    } catch (error) {
+      if (this.current === first) this.current = null;
+
+      reportError(error);
+      return;
+    }
+
+    if (this.current !== first) {
+      if (!running.resolved()) running.cancel();
+
+      return;
+    }
+
+    if (running.resolved()) {
+      this.current = null;
+
+      return;
+    }
+
+    const onDone = () => {
+      if (this._task.value !== running) return;
+
+      this.current = null;
+      this._task.value = null;
+    };
+
+    this._task.value = running;
+    running.matchTap({
       resolved: onDone,
       rejected: onDone,
       canceled: onDone,
     });
-  }
-
-  _cancel() {
-    this.task?.cancel();
   }
 
   _push(__tasks: T[]) {
@@ -125,10 +176,19 @@ class QueueClass<T extends Invokable<any>> implements Queue<T> {
   }
 
   shift() {
-    this._cancel();
+    if (this.task && !this.task.resolved()) this.task.cancel();
+    else if (!this.task && this.current) this.current = null;
+    else if (this.queue.length > 0) this._shift();
   }
 
   clear() {
+    const running = this.task;
+
     this._queue.value = [];
+    this.current = null;
+
+    if (running) this._task.value = null;
+
+    running?.cancel();
   }
 }
